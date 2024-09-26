@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -25,19 +26,31 @@ android {
             )
         }
     }
+    configurations.all {
+        resolutionStrategy.force ("androidx.annotation:annotation:1.8.2")
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 
-dependencies {
+    dependencies {
+        implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+        implementation(libs.material.v160)
+        implementation(libs.appcompat.v130)
+        implementation(libs.activity.v120)
+        implementation(libs.constraintlayout.v204)
+        implementation(libs.firebase.auth.v2101)
+        implementation(libs.firebase.database.v2003)
+        implementation(libs.firebase.storage)
+        implementation(libs.annotation.jvm)
+        testImplementation(libs.junit)
+        implementation(libs.recyclerview)
+        implementation(libs.circleimageview)
+        implementation(libs.glide)
+        annotationProcessor(libs.compiler) // Chỉ giữ một dòng này
+        androidTestImplementation(libs.junit.v113)
+        androidTestImplementation(libs.espresso.core.v340)
 
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.activity)
-    implementation(libs.constraintlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
-}
+    }
